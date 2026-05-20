@@ -1,0 +1,31 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+#
+# Free tier (~512 MB RAM) — ml-100k bundled in Docker image (15 MB).
+# SAMPLE_USERS=150 caps training to ~15K ratings so RAM stays under 512 MB.
+# RERANKER_USE_KEYWORDS_ONLY=1 skips sentence-transformers (~80 MB savings).
+# Result: proper genre reranking with 1,682 real movies on the free plan.
+
+services:
+  - type: web
+    name: recsys-llm-rerank
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      # ── Dataset (ml-100k is bundled in the Docker image — no download needed)
+      - key: DATASET_VARIANT
+        value: "ml-100k"
+      - key: SAMPLE_USERS
+        value: "150"           # ~15K ratings — fits comfortably in 512 MB RAM
+      # ── Memory savers ───────────────────────────────────────────────────────
+      - key: RERANKER_USE_KEYWORDS_ONLY
+        value: "1"             # skip sentence-transformers (saves ~80 MB)
+      # ── Training epochs ─────────────────────────────────────────────────────
+      - key: TWO_TOWER_EPOCHS
+        value: "5"
+      - key: RERANKER_EPOCHS
+        value: "2"

@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# Local artifacts
+# checkpoints/ — pre-trained models tracked for instant Render cold-starts
+# data/ml-100k/ — tracked intentionally (bundled in Docker for Render)
+data/ml-1m/
