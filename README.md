@@ -152,3 +152,28 @@ with gzip.open('reviews_Electronics_5.json.gz') as f:
 - **Netflix**: Matrix factorisation → ensemble re-ranking
 
 These systems all share the same core insight: *cheap retrieval at scale, expensive ranking at the top.*
+
+---
+
+## Cloud Deployment
+
+You can deploy and host this two-stage recommendation system on **Render** in just one click using the pre-configured [render.yaml](file:///Users/abhijeetabhi/Downloads/Recommendation-System-LLM-Re-ranking-main/render.yaml) blueprint. 
+
+The configuration is optimized for Render's **Free Plan** (512 MB RAM) by:
+- Pre-bundling the dataset to avoid heavy runtime downloads.
+- Restricting training size to stay well within RAM limits.
+- Skipping large SBERT model files on resource-constrained tiers.
+
+### 🚀 One-Click Deploy
+
+Click the button below to instantly deploy to your Render account:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Abhi3975/Recommendation-system-)
+
+### Manual Deployment Steps
+
+1. Create a free account or log in to the [Render Dashboard](https://dashboard.render.com/).
+2. Click the **New +** button at the top right and select **Blueprint**.
+3. Connect your GitHub repository: `https://github.com/Abhi3975/Recommendation-system-`.
+4. Review the Blueprint parameters and click **Approve** / **Deploy**.
+5. Once the build completes, Render will provide a public URL for your live API server and interactive UI!
