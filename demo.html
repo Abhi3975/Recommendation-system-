@@ -733,16 +733,52 @@
     ];
 
     const PRODUCTS = [
+      // Electronics
       { item_id: "p1", title: "Sony WH-1000XM5 Headphones", genre: "Electronics", year: 2022, tags: ["noise-cancelling", "wireless", "premium"] },
       { item_id: "p2", title: "Kindle Paperwhite", genre: "Electronics", year: 2021, tags: ["e-reader", "portable", "books"] },
-      { item_id: "p3", title: "Instant Pot Duo 7-in-1", genre: "Kitchen", year: 2020, tags: ["pressure-cooker", "multi-use", "time-saving"] },
-      { item_id: "p4", title: "LEGO Architecture Set", genre: "Toys", year: 2023, tags: ["creative", "display", "adult-fans"] },
       { item_id: "p5", title: "Anker PowerCore 26800", genre: "Electronics", year: 2022, tags: ["battery", "portable", "charging"] },
-      { item_id: "p6", title: "Yoga Mat Premium Cork", genre: "Sports", year: 2021, tags: ["fitness", "eco", "non-slip"] },
-      { item_id: "p7", title: "Moleskine Classic Notebook", genre: "Stationery", year: 2023, tags: ["journaling", "premium", "writing"] },
-      { item_id: "p8", title: "AeroPress Coffee Maker", genre: "Kitchen", year: 2020, tags: ["coffee", "portable", "smooth"] },
-      { item_id: "p9", title: "Garmin Forerunner 255", genre: "Sports", year: 2022, tags: ["GPS", "running", "health"] },
       { item_id: "p10", title: "Raspberry Pi 4 Model B", genre: "Electronics", year: 2022, tags: ["maker", "programming", "DIY"] },
+      { item_id: "p24", title: "Logitech MX Master 3S Mouse", genre: "Electronics", year: 2022, tags: ["productivity", "wireless", "ergonomic"] },
+      { item_id: "p25", title: "ASUS ROG Zephyrus G14 Laptop", genre: "Electronics", year: 2023, tags: ["gaming", "portable", "powerful"] },
+      
+      // Smartphones
+      { item_id: "p11", title: "iPhone 15 Pro Max", genre: "Smartphones", year: 2023, tags: ["apple", "ios", "premium", "5g"] },
+      { item_id: "p12", title: "Samsung Galaxy S24 Ultra", genre: "Smartphones", year: 2024, tags: ["android", "samsung", "ai", "5g"] },
+      { item_id: "p13", title: "Google Pixel 8 Pro", genre: "Smartphones", year: 2023, tags: ["android", "google", "camera", "ai"] },
+      { item_id: "p14", title: "OnePlus 12", genre: "Smartphones", year: 2024, tags: ["android", "fast-charging", "value"] },
+      
+      // Clothing
+      { item_id: "p15", title: "Patagonia Torrentshell Jacket", genre: "Clothing", year: 2022, tags: ["outdoor", "waterproof", "eco"] },
+      { item_id: "p16", title: "Levi's 511 Slim Fit Jeans", genre: "Clothing", year: 2023, tags: ["denim", "classic", "casual"] },
+      { item_id: "p17", title: "Nike Tech Fleece Hoodie", genre: "Clothing", year: 2023, tags: ["sportswear", "warm", "streetwear"] },
+      { item_id: "p18", title: "Adidas Ultraboost Running Shoes", genre: "Clothing", year: 2022, tags: ["sneakers", "running", "comfort"] },
+      { item_id: "p19", title: "Calvin Klein Cotton Boxer Briefs", genre: "Clothing", year: 2023, tags: ["underwear", "comfort", "classic"] },
+      
+      // Accessories
+      { item_id: "p20", title: "Apple Watch Series 9", genre: "Accessories", year: 2023, tags: ["smartwatch", "fitness", "apple"] },
+      { item_id: "p21", title: "Ray-Ban Classic Wayfarer", genre: "Accessories", year: 2021, tags: ["sunglasses", "classic", "style"] },
+      { item_id: "p22", title: "Fossil Minimalist Leather Watch", genre: "Accessories", year: 2022, tags: ["watch", "leather", "classic"] },
+      { item_id: "p23", title: "Peak Design Everyday Backpack", genre: "Accessories", year: 2023, tags: ["camera-bag", "travel", "premium"] },
+      
+      // Kitchen
+      { item_id: "p3", title: "Instant Pot Duo 7-in-1", genre: "Kitchen", year: 2020, tags: ["pressure-cooker", "multi-use", "time-saving"] },
+      { item_id: "p8", title: "AeroPress Coffee Maker", genre: "Kitchen", year: 2020, tags: ["coffee", "portable", "smooth"] },
+      { item_id: "p26", title: "KitchenAid Artisan Stand Mixer", genre: "Kitchen", year: 2021, tags: ["baking", "mixer", "premium"] },
+      { item_id: "p27", title: "Chef's Knife 8-inch Damascus", genre: "Kitchen", year: 2022, tags: ["knife", "cooking", "sharp"] },
+      
+      // Toys
+      { item_id: "p4", title: "LEGO Architecture Set", genre: "Toys", year: 2023, tags: ["creative", "display", "adult-fans"] },
+      { item_id: "p28", title: "Catan Board Game", genre: "Toys", year: 2020, tags: ["strategy", "multiplayer", "family"] },
+      { item_id: "p29", title: "DJI Neo Mini Drone", genre: "Toys", year: 2023, tags: ["drone", "camera", "flying"] },
+      
+      // Sports
+      { item_id: "p6", title: "Yoga Mat Premium Cork", genre: "Sports", year: 2021, tags: ["fitness", "eco", "non-slip"] },
+      { item_id: "p9", title: "Garmin Forerunner 255", genre: "Sports", year: 2022, tags: ["GPS", "running", "health"] },
+      { item_id: "p30", title: "Theragun Mini Massage Gun", genre: "Sports", year: 2021, tags: ["recovery", "portable", "muscle"] },
+      
+      // Stationery
+      { item_id: "p7", title: "Moleskine Classic Notebook", genre: "Stationery", year: 2023, tags: ["journaling", "premium", "writing"] },
+      { item_id: "p31", title: "Lamy Safari Fountain Pen", genre: "Stationery", year: 2022, tags: ["writing", "pen", "classic"] },
     ];
 
     const USER_PROFILES = {
@@ -772,10 +808,29 @@
       const n_items = items.length;
       const R = Array.from({ length: n_users }, () => new Array(n_items).fill(0));
 
+      const GENRE_MAP = {
+        "Drama": "Clothing",
+        "Sci-Fi": "Smartphones",
+        "Action": "Accessories",
+        "Adventure": "Sports",
+        "Animation": "Toys",
+        "Romance": "Clothing",
+        "Crime": "Electronics",
+        "Thriller": "Electronics",
+        "Horror": "Accessories",
+        "Fantasy": "Toys",
+        "Mystery": "Stationery",
+        "Comedy": "Kitchen"
+      };
+
       users.forEach((uid, ui) => {
         const profile = USER_PROFILES[uid];
         const rng = seededRandom(uid.charCodeAt(0) * 137 + ui * 31);
-        const preferred = new Set(profile.preferred_genres);
+        let preferredGenres = profile.preferred_genres;
+        if (dataset === 'products') {
+          preferredGenres = preferredGenres.map(g => GENRE_MAP[g] || g);
+        }
+        const preferred = new Set(preferredGenres);
         const sampleCount = Math.min(12, items.length);
 
         // Simple deterministic sample

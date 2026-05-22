@@ -86,6 +86,15 @@ _GENRE_KEYWORD_MAP = {
     "animation": {"cartoon", "animated", "anime", "family", "kids", "pixar"},
     "mystery"  : {"mystery", "whodunit", "detective", "clue", "investigation"},
     "fantasy"  : {"fantasy", "magic", "wizard", "dragon", "epic", "quest"},
+    # Amazon-style Product Categories
+    "smartphones": {"phone", "smartphone", "iphone", "pixel", "galaxy", "android", "mobile", "samsung", "oneplus", "apple", "ios"},
+    "clothing": {"clothing", "shirt", "jacket", "jeans", "pants", "shoes", "hoodie", "apparel", "wear", "denim", "socks", "briefs", "underwear", "coat", "sweater", "sneakers", "boots"},
+    "accessories": {"accessories", "watch", "smartwatch", "backpack", "sunglasses", "glasses", "bag", "leather", "wallet", "belt", "hat", "cap"},
+    "electronics": {"electronics", "headphones", "battery", "laptop", "mouse", "charger", "gadget", "tech", "computer", "earbuds", "speaker", "soundbar", "keyboard", "monitor"},
+    "kitchen": {"kitchen", "coffee", "maker", "knife", "cooking", "cooker", "mixer", "baking", "pan", "pot", "blender", "toaster", "kettle", "oven"},
+    "toys": {"toys", "lego", "game", "board", "strategy", "drone", "play", "puzzle", "action-figure", "doll"},
+    "sports": {"sports", "yoga", "fitness", "running", "massage", "active", "workout", "gym", "dumbbell", "exercise", "athletic"},
+    "stationery": {"stationery", "notebook", "pen", "writing", "journal", "pencil", "paper", "planner", "marker"}
 }
 
 def _extract_intent_genres(user_context: Optional[str], known_genres: set[str]) -> list[str]:
@@ -590,6 +599,10 @@ class NeuralReranker:
 
         # Detect explicit genre intent from the prompt.
         known_genres = {g.lower() for g in self.genre_to_id.keys()}
+        # Add genres from the candidate items to dynamically support other datasets (like Amazon products)
+        for c in candidates:
+            if "genre" in c:
+                known_genres.add(c["genre"].lower())
         intents = _extract_intent_genres(user_context, known_genres)
         intent_set = set(intents)
 
